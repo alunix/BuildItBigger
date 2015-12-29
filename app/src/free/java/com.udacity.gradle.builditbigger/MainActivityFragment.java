@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -24,6 +24,7 @@ import app.com.example.ttins.androidjokelib.JokeLibMainActivity;
 public class MainActivityFragment extends Fragment {
 
     public static final String INTENT_JOKE = "JOKE";
+    private ProgressBar mSpinner;
     InterstitialAd mInterstitialAd;
 
     public MainActivityFragment() {
@@ -36,6 +37,8 @@ public class MainActivityFragment extends Fragment {
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         Button mTellJokeButton = (Button) root.findViewById(R.id.tell_joke_button);
+        mSpinner = (ProgressBar) root.findViewById(R.id.progressBar);
+        mSpinner.setVisibility(View.GONE);
         // Create an ad request. Check logcat output for the hashed device ID to
         // get test ads on a physical device. e.g.
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
@@ -84,6 +87,7 @@ public class MainActivityFragment extends Fragment {
         AsyncFileDownloader asyncFileDownloader;
         DownloadHolder downloadHolder;
 
+        mSpinner.setVisibility(View.VISIBLE);
         downloadHolder = new DownloadHolder();
         asyncFileDownloader = new AsyncFileDownloader(getActivity(), downloadHolder);
         asyncFileDownloader.download();
@@ -97,6 +101,7 @@ public class MainActivityFragment extends Fragment {
             Intent intent = new Intent(context, JokeLibMainActivity.class);
             intent.setAction(Intent.ACTION_SEND);
             intent.putExtra(INTENT_JOKE, result);
+            mSpinner.setVisibility(View.GONE);
             startActivity(intent);
         }
     }

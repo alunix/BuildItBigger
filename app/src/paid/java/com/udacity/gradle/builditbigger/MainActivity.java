@@ -14,8 +14,6 @@ import app.com.example.ttins.androidjokelib.JokeLibMainActivity;
 
 public class MainActivity extends ActionBarActivity {
 
-    public static final String INTENT_JOKE = "JOKE";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,28 +41,6 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void tellJoke(View view){
-
-        AsyncFileDownloader asyncFileDownloader;
-        DownloadHolder downloadHolder;
-
-        downloadHolder = new DownloadHolder();
-        asyncFileDownloader = new AsyncFileDownloader(this, downloadHolder);
-        asyncFileDownloader.download();
-
-    }
-
-
-    class DownloadHolder implements IDownloadListener {
-
-        public void downloadComplete(Context context, String result) {
-            Intent intent = new Intent(context, JokeLibMainActivity.class);
-            intent.setAction(Intent.ACTION_SEND);
-            intent.putExtra(INTENT_JOKE, result);
-            startActivity(intent);
-        }
     }
 
 }
