@@ -17,3 +17,44 @@ allprojects {
         jcenter()
     }
 }
+
+//*****************************
+//TASK - Start Backend Service, Run Tests and Stop Backend Service at the end.
+task startAppEngine(dependsOn: ':backend:appengineRun') {
+    evaluationDependsOn ':backend'
+
+    project(':backend') {
+        appengine {
+            daemon true
+        }
+    }
+
+    doLast {
+        println 'Starting App Engine'
+    }
+}
+
+task stopAppEngine() {
+    dependsOn ':backend:appengineStop'
+    mustRunAfter 'runTests'
+
+    doLast {
+        println 'Stopping App Engine'
+    }
+}
+
+task runTests() {
+    dependsOn ':app:connectedAndroidTest'
+    mustRunAfter 'startAppEngine'
+
+    doLast {
+        println 'TESTS COMPLETED!'
+    }
+}
+
+task runConnectedTests() {
+    dependsOn= ['startAppEngine', 'runTests']
+    finalizedBy 'stopAppEngine'
+}
+//*****************************
+
