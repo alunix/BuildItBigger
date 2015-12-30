@@ -98,11 +98,13 @@ public class MainActivityFragment extends Fragment {
     class DownloadHolder implements IDownloadListener {
 
         public void downloadComplete(Context context, String result) {
-            Intent intent = new Intent(context, JokeLibMainActivity.class);
-            intent.setAction(Intent.ACTION_SEND);
-            intent.putExtra(INTENT_JOKE, result);
-            mSpinner.setVisibility(View.GONE);
-            startActivity(intent);
+            if(isAdded()) {
+                Intent intent = new Intent(context, JokeLibMainActivity.class);
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(INTENT_JOKE, result);
+                mSpinner.setVisibility(View.GONE);
+                startActivity(intent);
+            }
         }
     }
 }
