@@ -16,3 +16,51 @@ You will find this explicit content:
 	    <string name="action_settings">Settings</string>
 	    <string name="banner_ad_unit_id">ca-app-pub-INSERT_YOUR_CODE_HERE</string>
 	</resources>
+
+# Application Build
+To build this application you need to install the following project dependencies:
+ classpath 'com.android.tools.build:gradle:1.2.3'
+
+You need to have in your environment the following build tool version:
+ compileSdkVersion 23
+ buildToolsVersion "23.0.1"
+
+and all the following dependencies:
+ compile project(':jokelib')
+ compile project(':androidjokelib')
+ compile 'com.android.support:appcompat-v7:23.1.0'
+ compile 'com.android.support:multidex:1.0.0'
+ // Added for AdMob
+ freeCompile 'com.google.android.gms:play-services:8.1.0'
+ testCompile 'junit:junit:4.12'
+
+# Backend Build
+To build the Backend you need to install:
+ classpath 'com.google.appengine:gradle-appengine-plugin:1.9.18'
+
+and be sure to have properly installed in your system the following dependencies:
+ appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.18'
+ compile 'com.google.appengine:appengine-endpoints:1.9.18'
+ compile 'com.google.appengine:appengine-endpoints-deps:1.9.18'
+ compile 'javax.servlet:servlet-api:2.5'
+ compile project(':jokelib')
+
+# AndroidJokeLib Build
+You need to have in your environment the following build tool version:
+ compileSdkVersion 23
+ buildToolsVersion "23.0.1"
+
+and be sure to have properly installed in your system the following dependencies:
+ testCompile 'junit:junit:4.12'
+ compile 'com.android.support:appcompat-v7:23.1.0'
+ compile 'com.android.support:design:23.1.0'
+
+
+# Install
+To install the App on your device/emulator, you have to ensure your Android API versione is 18 or above.
+
+The following permissions will be needed:
+ 
+ android.permission.INTERNET
+ android.permission.ACCESS_NETWORK_STATE
+
